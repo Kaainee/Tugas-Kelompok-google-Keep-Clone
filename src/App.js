@@ -1,32 +1,44 @@
-import React, { useState, useEffect } from 'react';
-import Header from './components/Header';
-import NoteForm from './components/NoteForm';
-import NotesList from './components/NotesList';
-import Sidebar from './components/Sidebar';
-import './App.css';
+import React, { useState, useEffect } from "react";
+import Header from "./components/Header";
+import NoteForm from "./components/NoteForm";
+import NotesList from "./components/NotesList";
+import Sidebar from "./components/Sidebar";
+import "./App.css";
 
 function App() {
   const [notes, setNotes] = useState([]);
-  const [searchQuery, setSearchQuery] = useState('');
-  const [view, setView] = useState('notes'); // 'notes' atau 'archive'
+  const [searchQuery, setSearchQuery] = useState("");
+  const [view, setView] = useState("notes"); // 'notes' atau 'archive'
+  const [isDarkMode, setIsDarkMode] = useState(false);
 
   useEffect(() => {
-    const savedNotes = localStorage.getItem('keepNotes');
+    const savedNotes = localStorage.getItem("keepNotes");
     if (savedNotes) {
       try {
         setNotes(JSON.parse(savedNotes));
-      } catch (e) { console.error("Error parsing notes from localStorage", e); }
+      } catch (e) {
+        console.error("Error parsing notes from localStorage", e);
+      }
     }
+
+    const savedTheme = localStorage.getItem("darkMode");
+    if (savedTheme === "true") setIsDarkMode(true); 
   }, []);
 
   useEffect(() => {
     try {
-      localStorage.setItem('keepNotes', JSON.stringify(notes));
+      localStorage.setItem("keepNotes", JSON.stringify(notes));
     } catch (e) {
-      console.error("Gagal menyimpan catatan, kemungkinan localStorage penuh.", e);
-      alert("Gagal menyimpan catatan. Penyimpanan mungkin penuh. Coba hapus beberapa catatan dengan gambar besar.");
+      console.error(
+        "Gagal menyimpan catatan, kemungkinan localStorage penuh.",
+        e
+      );
+      alert(
+        "Gagal menyimpan catatan. Penyimpanan mungkin penuh. Coba hapus beberapa catatan dengan gambar besar."
+      );
     }
-  }, [notes]);
+    localStorage.setItem('darkMode', isDarkMode);
+  }, [notes, isDarkMode]);
 
   const addNote = (noteData) => {
     const newNote = {
@@ -35,20 +47,22 @@ function App() {
       content: noteData.content,
       createdAt: new Date().toISOString(),
       pinned: false,
-      background: '#FFFFFF',
+      background: "#FFFFFF",
       isArchived: false,
     };
     setNotes([newNote, ...notes]);
   };
-  
+
   const toggleArchiveNote = (id) => {
     setNotes(
       notes.map((note) =>
-        note.id === id ? { ...note, isArchived: !note.isArchived, pinned: false } : note
+        note.id === id
+          ? { ...note, isArchived: !note.isArchived, pinned: false }
+          : note
       )
     );
   };
-  
+
   const updateNote = (id, updatedNote) => {
     setNotes(notes.map((note) => (note.id === id ? updatedNote : note)));
   };
@@ -56,6 +70,8 @@ function App() {
   const deleteNote = (id) => {
     setNotes(notes.filter((note) => note.id !== id));
   };
+
+   const toggleDarkMode = () => setIsDarkMode(!isDarkMode);
 
   const togglePinNote = (id) => {
     setNotes(
@@ -74,12 +90,12 @@ function App() {
   };
 
   const filteredNotes = notes
-    .filter(note => {
-      if (view === 'notes') return !note.isArchived;
-      if (view === 'archive') return note.isArchived;
+    .filter((note) => {
+      if (view === "notes") return !note.isArchived;
+      if (view === "archive") return note.isArchived;
       return true;
     })
-    .filter(note => {
+    .filter((note) => {
       const query = searchQuery.toLowerCase();
       const titleMatch = note.title.toLowerCase().includes(query);
       const contentMatch = note.content.toLowerCase().includes(query);
@@ -87,16 +103,19 @@ function App() {
     });
 
   return (
+    <div className ={`app ${isDarkMode ? 'dark' : ''}`}>
     <div className="app-container">
       <Sidebar view={view} setView={setView} />
-      
+
       <div className="main-content-area">
         <Header
           searchQuery={searchQuery}
           onSearchChange={(e) => setSearchQuery(e.target.value)}
+          toggleDarkMode={toggleDarkMode}
+          isDarkMode={isDarkMode}
         />
         <main className="app-main">
-          {view === 'notes' && !searchQuery && <NoteForm addNote={addNote} />}
+          {view === "notes" && !searchQuery && <NoteForm addNote={addNote} />}
           <NotesList
             notes={filteredNotes}
             updateNote={updateNote}
@@ -104,10 +123,11 @@ function App() {
             togglePinNote={togglePinNote}
             changeNoteBackground={changeNoteBackground}
             toggleArchiveNote={toggleArchiveNote}
-            isArchiveView={view === 'archive'}
+            isArchiveView={view === "archive"}
           />
         </main>
       </div>
+    </div>
     </div>
   );
 }

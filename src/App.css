@@ -4,7 +4,7 @@
 
 body {
   margin: 0;
-  font-family: 'Google Sans', 'Roboto', Arial, sans-serif;
+  font-family: "Google Sans", "Roboto", Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: #fff;
@@ -12,10 +12,19 @@ body {
 }
 
 /* Scrollbar styling */
-::-webkit-scrollbar { width: 8px; }
-::-webkit-scrollbar-track { background: #f1f1f1; }
-::-webkit-scrollbar-thumb { background: #888; border-radius: 4px; }
-::-webkit-scrollbar-thumb:hover { background: #555; }
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
 
 /* Tata Letak Utama */
 .app-container {
@@ -31,8 +40,132 @@ body {
   background-color: #fff;
 }
 
-.app-main {
-  flex-grow: 1;
-  overflow-y: auto;
-  padding: 24px 32px;
+/* Dark Mode Styles */
+
+.app.dark {
+  background-color: #202124 !important;
+  color: #e8eaed !important;
+}
+
+/* Sidebar Dark*/
+.app.dark .sidebar {
+  background-color: #303134 !important;
+  color: #e8eaed !important;
+  border-right: 1px solid #5f6368 !important;
+}
+
+/* Header Dark*/
+.app.dark .header {
+  background-color: #303134 !important;
+  color: #e8eaed !important;
+  border-bottom: 1px solid #5f6368 !important;
+}
+
+/* Main Content Dark*/
+.app.dark .main-content-area,
+.app.dark .app-main {
+  background-color: #202124 !important;
+  color: #e8eaed !important;
+}
+
+/* Note form Dark */
+.app.dark .note-form {
+  background-color: #303134 !important;
+  border: 1px solid #5f6368 !important;
+  color: #e8eaed !important;
+}
+
+.app.dark .note-form input,
+.app.dark .note-form textarea {
+  background-color: transparent !important;
+  color: #e8eaed !important;
+}
+
+/* Notes (cards) Dark */
+.app.dark .note {
+  background-color: #303134 !important;
+  border: 1px solid #5f6368 !important;
+  color: #e8eaed !important;
+}
+
+/* Notes list container Dark */
+.app.dark .notes-list {
+  background-color: #202124 !important;
+  color: #e8eaed !important;
+}
+
+/* Search bar, buttons, toggles Dark */
+.app.dark input[type="search"],
+.app.dark button {
+  background-color: #303134 !important;
+  color: #e8eaed !important;
+  border: 1px solid #5f6368 !important;
+}
+
+/* theme toggle dark */
+.theme-toggle {
+  margin-left: 16px;
+  border-radius: 6px;
+  padding: 6px 12px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* theme toggle hover dark */
+.theme-toggle:hover {
+  background-color: #5f6368 !important;
+  color: #fff !important;
+}
+
+/* Color to white when Dark mode */
+.app.dark,
+.app.dark h1,
+.app.dark h2,
+.app.dark h3,
+.app.dark h4,
+.app.dark h5,
+.app.dark h6,
+.app.dark p,
+.app.dark span,
+.app.dark label,
+.app.dark input,
+.app.dark textarea,
+.app.dark button,
+.app.dark .note,
+.app.dark .note-form,
+.app.dark .notes-list,
+.app.dark .header,
+.app.dark .sidebar,
+.app.dark .theme-toggle {
+  color: #e8eaed !important;
+}
+
+/* Placeholder di tulis catatan...*/
+.app.dark ::placeholder {
+  color: #b0b3b8 !important; /* abu muda */
+}
+
+/* ikon, svg, path jadi putih */
+.app.dark svg,
+.app.dark svg path {
+  fill: #e8eaed !important;
+}
+
+/* Pastikan background input nggak nutup */
+.app.dark input,
+.app.dark textarea {
+  background-color: transparent !important;
+  border-color: #5f6368 !important;
+}
+
+/* Tambahan buat link atau teks yang interaktif */
+.app.dark a {
+  color: #9aa0a6 !important;
+}
+
+/* Dark mode active sidebar item */
+.app.dark .sidebar .active {
+  background-color: #5f6368 !important;
+  color: #ffffff !important;
 }

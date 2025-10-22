@@ -1,7 +1,7 @@
 import React from 'react';
 import './Header.css';
 
-function Header({ searchQuery, onSearchChange }) {
+function Header({ searchQuery, onSearchChange, toggleDarkMode, isDarkMode }) {
   return (
     <header className="header">
       <div className="header-content">
@@ -18,6 +18,10 @@ function Header({ searchQuery, onSearchChange }) {
             onChange={onSearchChange}
           />
         </div>
+
+        <button className="theme-toggle" onClick={toggleDarkMode}>
+          {isDarkMode ? '🌞 Light' : '🌙 Dark'}
+        </button>
       </div>
     </header>
   );
