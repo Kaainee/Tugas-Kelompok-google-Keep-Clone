@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/Tugas-Kelompok-google-Keep-Clone/static/css/main.6ccbccdb.css",
+    "main.js": "/Tugas-Kelompok-google-Keep-Clone/static/js/main.485062a3.js",
+    "index.html": "/Tugas-Kelompok-google-Keep-Clone/index.html",
+    "main.6ccbccdb.css.map": "/Tugas-Kelompok-google-Keep-Clone/static/css/main.6ccbccdb.css.map",
+    "main.485062a3.js.map": "/Tugas-Kelompok-google-Keep-Clone/static/js/main.485062a3.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.6ccbccdb.css",
+    "static/js/main.485062a3.js"
+  ]
+}
